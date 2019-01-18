@@ -1,0 +1,51 @@
+#,Field,Description,Type,Length,Pos,Req,Comment
+1,OMS Order Number,OMS Order Number,Char,11,1,Yes,
+2,OMS Order Sequence Number,OMS Order Sequence Number,Char,3,12,Yes,A unique sequential number for each shipment on the order
+3,OMS Order Line Number,OMS Order Line Number,Char,4,15,Yes,A unique sequential number starting with 1 for each item within the transaction.
+4,Blank,,Char,3,19,Yes,
+5,Item Number,Item number for merchandise,Char,15,22,Yes,Merchandise Item Value: SKU Number
+6,Blank,,Char,18,37,Yes,
+7,Shipped Quantity,Quantity shipped,Numeric,9,55,Yes,
+8,MSRP,Manufacturer’s suggested retail price,Numeric,"15,5",64,Yes,
+9,Extended Price,"The extended price the customer paid, with all discounts applied multiplied by the shipped quantity., For RETURNS it is the amount refunded to the customer., FOR PRICE ADJUSTMENT it is the amount refunded to the customer.",Numeric,"15,5",79,Yes,Implied Decimal Point
+10,Blank,,Char,5,94,Yes,
+11,Tax Rate,Tax Rate,Numeric,"10,8",99,Yes,"Ex. 8.624209% = 0008624209, Implied Decimal Point"
+12,VAT,Sales Tax on the extended price,Numeric,"15,5",109,109,Implied Decimal Point
+13,SKU Type,SKU Type,Char,3,124,Yes,Values: SKU = Merchandise skus; NM = Non-merchandise skus
+14,Ship Date,Ship Date – YYMMDD,Char,6,127,Yes,
+15,Blank,,Char,32,133,Yes,
+16,Ship To Customer Name,,Char,60,165,Yes,
+17,Ship To Addr1,,Char,50,225,Yes,
+18,Ship To Addr2,,Char,50,275,No,
+19,Blank,,Char,50,325,Yes,
+20,Ship To City,Ship To City,Char,30,375,No,
+21,Ship To State,Ship To State,Char,10,405,No,Map First 10 Characters of County
+22,Ship To Postal Code,Ship To Postal Code,Char,20,415,No,
+23,Ship To Country,Ship To Country,Char,20,435,Yes,ISO 3166-1-alpha-2 Country Codes are used
+24,Blank,,Char,50,455,Yes,
+25,Gift Card Serial Number,Gift card number for purchased physical and digital gift cards,Char,20,505,Yes,
+26,Original OMS Order Number,OMS Order Number,Char,11,525,Yes,Required for a return transaction to reference the original sale transaction
+27,Original OMS Order Sequence Number,OMS Order Sequence Number,Char,3,536,Yes,Required for a return transaction to reference the original sale transaction
+28,Reason Code,,Char,3,539,Yes,Required for a return transaction
+29,Inventory Condition,,Char,5,542,Yes,Required for a return transaction to determine if the returned merchandise is sellable or not sellable? Values: Y or N
+30,Tax Category Code,Tax Category Code,Char,5,547,,Map to Product Tax Group
+31,Blank,,Char,50,552,Yes,
+32,Gift Wrap Amount,Gift Wrap Amount,Numeric,"15,5",602,Yes,
+33,Blank,,Char,52,617,Yes,
+34,Date/Time Stamp,"Date and Time in which the file was generated, Format yyyy-mm-dd-hh.mm.ss",Char,19,669,Yes,
+35,Blank,,Char,15,688,Yes,
+36,Order Line Number,This is the Venda item reference number.,Numeric,15,703,Yes,This will tie together Sales with Returns & Price Adjustments.
+37,External Promo Name 1,Name of the promotion,Char,16,718,Yes,ex. Get 15% Off Each Item; ** See Promotion Use Case 1
+38,External Promo Amount 1,Extended discount amount,Sp Num,60,734,Yes,"ex. 7.80; If multiple discounts, this will be the maximum discount"
+39,External Promo Name 2,Name of the promotion,Char,16,794,Yes,ex. Get 15% Off Each Item
+40,External Promo Amount 2,Extended discount amount,Sp Num,60,810,Yes,ex. 5.60
+41,External Promo Name 3,Name of the promotion,Char,16,870,Yes,ex. Get 15% Off Each Item
+42,External Promo Amount 3,Extended discount amount,Sp Num,60,886,Yes,ex. 3.40
+43,Brand Id,The brand of the purchased item,Char,5,946,Yes,
+44,Original Selling Retail,"The original extended price the customer paid, with all discounts applied multiplied by the shipped quantity",Numeric,"15,5",951,Yes,Implied Decimal Point; Required for Price Adjustment; ** See PA Use Case 3
+45,Gift Wrap Tax Amount,Gift Wrap Tax Amount,Numeric,"15,5",966,Yes,Implied Decimal Point
+46,External Promo Coupon 1,Coupon Code,Char,40,981,Yes,Linked to External Promo Name 1 & Amount 1; ex. HOLIDAY15
+47,External Promo Coupon 2,Coupon Code,Char,40,1021,Yes,Linked to External Promo Name 2 & Amount 2; ex.SHOP10
+48,External Promo Coupon 3,Coupon Code,Char,40,1061,Yes,Linked to External Promo Name 3 & Amount 3; ex. SUMMER20
+49,Blank,,Char,6,1101,Yes,
+50,Original Ship Date,Original Ship Date,Char,8,1107,Yes,Required for a return transaction
