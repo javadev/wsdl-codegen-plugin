@@ -1,0 +1,689 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="AddressCheckSoap" targetNamespace="urn:mdGlobalAddress" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="urn:mdGlobalAddress" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing">
+    <wsp:Policy wsu:Id="soapSSLEndpointGlobalAddressCheck_policy">
+        <wsp:ExactlyOne>
+            <wsp:All>
+                <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+                    <wsp:Policy>
+                        <sp:TransportToken>
+                            <wsp:Policy>
+                                <sp:HttpsToken RequireClientCertificate="false"/>
+                            </wsp:Policy>
+                        </sp:TransportToken>
+                        <sp:AlgorithmSuite>
+                            <wsp:Policy>
+                                <sp:Basic256/>
+                            </wsp:Policy>
+                        </sp:AlgorithmSuite>
+                        <sp:Layout>
+                            <wsp:Policy>
+                                <sp:Strict/>
+                            </wsp:Policy>
+                        </sp:Layout>
+                    </wsp:Policy>
+                </sp:TransportBinding>
+            </wsp:All>
+        </wsp:ExactlyOne>
+    </wsp:Policy>
+    <wsdl:types>
+        <xs:schema elementFormDefault="qualified" targetNamespace="urn:mdGlobalAddress" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:element name="doGlobalAddress">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="Request" nillable="true" type="tns:Request"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="Request">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="TransmissionReference" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="CustomerID" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="Options" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="Records" nillable="true" type="tns:ArrayOfRequestRecord">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="Request" nillable="true" type="tns:Request"/>
+            <xs:complexType name="ArrayOfRequestRecord">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="RequestRecord" nillable="true" type="tns:RequestRecord"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="ArrayOfRequestRecord" nillable="true" type="tns:ArrayOfRequestRecord"/>
+            <xs:complexType name="RequestRecord">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="RecordID" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="Organization" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="AddressLine1" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="AddressLine2" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="AddressLine3" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="AddressLine4" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="AddressLine5" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="AddressLine6" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="AddressLine7" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="AddressLine8" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="DoubleDependentLocality" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="DependentLocality" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="Locality" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="SubAdministrativeArea" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="AdministrativeArea" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="PostalCode" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="SubNationalArea" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="Country" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="RecordOptions" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="RequestRecord" nillable="true" type="tns:RequestRecord"/>
+            <xs:element name="doGlobalAddressResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="doGlobalAddressResult" nillable="true" type="tns:Response"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="Response">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Version" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="TransmissionReference" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="TransmissionResults" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="TotalRecords" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="Records" nillable="true" type="tns:ArrayOfResponseRecord">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="Response" nillable="true" type="tns:Response"/>
+            <xs:complexType name="ArrayOfResponseRecord">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="ResponseRecord" nillable="true" type="tns:ResponseRecord"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="ArrayOfResponseRecord" nillable="true" type="tns:ArrayOfResponseRecord"/>
+            <xs:complexType name="ResponseRecord">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="RecordID" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="Results" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="FormattedAddress" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="Organization" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="AddressLine1" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="AddressLine2" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="AddressLine3" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="AddressLine4" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="AddressLine5" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="AddressLine6" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="AddressLine7" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="AddressLine8" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="SubPremises" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="DoubleDependentLocality" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="DependentLocality" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="Locality" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="SubAdministrativeArea" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="AdministrativeArea" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="PostalCode" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="AddressType" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="AddressKey" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="SubNationalArea" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="CountryName" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="CountryISO3166_1_Alpha2" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="CountryISO3166_1_Alpha3" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="CountryISO3166_1_Numeric" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="CountrySubdivisionCode" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="Thoroughfare" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="ThoroughfarePreDirection" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="ThoroughfareLeadingType" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="ThoroughfareName" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="ThoroughfareTrailingType" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="ThoroughfarePostDirection" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="DependentThoroughfare" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="DependentThoroughfarePreDirection" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="DependentThoroughfareLeadingType" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="DependentThoroughfareName" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="DependentThoroughfareTrailingType" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="DependentThoroughfarePostDirection" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="Building" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="PremisesType" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="PremisesNumber" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="SubPremisesType" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="SubPremisesNumber" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="PostBox" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="Latitude" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="Longitude" nillable="true" type="xs:string">
+                        <xs:annotation>
+                            <xs:appinfo>
+                                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+                            </xs:appinfo>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="ResponseRecord" nillable="true" type="tns:ResponseRecord"/>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/">
+            <xs:element name="anyType" nillable="true" type="xs:anyType"/>
+            <xs:element name="anyURI" nillable="true" type="xs:anyURI"/>
+            <xs:element name="base64Binary" nillable="true" type="xs:base64Binary"/>
+            <xs:element name="boolean" nillable="true" type="xs:boolean"/>
+            <xs:element name="byte" nillable="true" type="xs:byte"/>
+            <xs:element name="dateTime" nillable="true" type="xs:dateTime"/>
+            <xs:element name="decimal" nillable="true" type="xs:decimal"/>
+            <xs:element name="double" nillable="true" type="xs:double"/>
+            <xs:element name="float" nillable="true" type="xs:float"/>
+            <xs:element name="int" nillable="true" type="xs:int"/>
+            <xs:element name="long" nillable="true" type="xs:long"/>
+            <xs:element name="QName" nillable="true" type="xs:QName"/>
+            <xs:element name="short" nillable="true" type="xs:short"/>
+            <xs:element name="string" nillable="true" type="xs:string"/>
+            <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte"/>
+            <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt"/>
+            <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong"/>
+            <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort"/>
+            <xs:element name="char" nillable="true" type="tns:char"/>
+            <xs:simpleType name="char">
+                <xs:restriction base="xs:int"/>
+            </xs:simpleType>
+            <xs:element name="duration" nillable="true" type="tns:duration"/>
+            <xs:simpleType name="duration">
+                <xs:restriction base="xs:duration">
+                    <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?"/>
+                    <xs:minInclusive value="-P10675199DT2H48M5.4775808S"/>
+                    <xs:maxInclusive value="P10675199DT2H48M5.4775807S"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:element name="guid" nillable="true" type="tns:guid"/>
+            <xs:simpleType name="guid">
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:attribute name="FactoryType" type="xs:QName"/>
+            <xs:attribute name="Id" type="xs:ID"/>
+            <xs:attribute name="Ref" type="xs:IDREF"/>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="AddressCheckSoap_doGlobalAddress_InputMessage">
+        <wsdl:part name="parameters" element="tns:doGlobalAddress"/>
+    </wsdl:message>
+    <wsdl:message name="AddressCheckSoap_doGlobalAddress_OutputMessage">
+        <wsdl:part name="parameters" element="tns:doGlobalAddressResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="AddressCheckSoap">
+        <wsdl:operation name="doGlobalAddress">
+            <wsdl:input wsaw:Action="urn:mdGlobalAddress/AddressCheckSoap/doGlobalAddress" message="tns:AddressCheckSoap_doGlobalAddress_InputMessage"/>
+            <wsdl:output wsaw:Action="urn:mdGlobalAddress/AddressCheckSoap/doGlobalAddressResponse" message="tns:AddressCheckSoap_doGlobalAddress_OutputMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="soapEndpointGlobalAddressCheck" type="tns:AddressCheckSoap">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="doGlobalAddress">
+            <soap:operation soapAction="urn:mdGlobalAddress/AddressCheckSoap/doGlobalAddress" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="soapSSLEndpointGlobalAddressCheck" type="tns:AddressCheckSoap">
+        <wsp:PolicyReference URI="#soapSSLEndpointGlobalAddressCheck_policy"/>
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="doGlobalAddress">
+            <soap:operation soapAction="urn:mdGlobalAddress/AddressCheckSoap/doGlobalAddress" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="AddressCheckSoap">
+        <wsdl:port name="soapEndpointGlobalAddressCheck" binding="tns:soapEndpointGlobalAddressCheck">
+            <soap:address location="http://address.melissadata.net/v3/SOAP/GlobalAddress"/>
+        </wsdl:port>
+        <wsdl:port name="soapSSLEndpointGlobalAddressCheck" binding="tns:soapSSLEndpointGlobalAddressCheck">
+            <soap:address location="https://address.melissadata.net/v3/SOAP/GlobalAddress"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
